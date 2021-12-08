@@ -34,12 +34,13 @@ class App extends Component {
             newCart.push({product: product, quantity: 1});
         }
         this.setState({cart: newCart});
-        alertify.success(product.productName + " is added to cart!", 1);
+        alertify.success(product.productName + " is added to the cart!", 1);
     }
 
     removeFromCart = product => {
         let newCart = this.state.cart.filter(c => c.product.id !== product.id);
         this.setState({cart: newCart});
+        alertify.error(product.productName + " is removed from the cart!", 1);
     }
 
     getProducts = categoryId => {
@@ -72,7 +73,9 @@ class App extends Component {
                                     <ProductList currentCategory={this.state.currentCategory} addToCart={this.addToCart}
                                                  productInfo={productInfo}
                                                  products={this.state.products}> </ProductList>}/>
-                                <Route exact path="/cart" component={CartList}/>
+                                <Route exact path="/cart" render={props =>
+                                    <CartList cart={this.state.cart} removeFromCart={this.removeFromCart}>
+                                    </CartList>}/>
                                 <Route component={NotFound}/>
                             </Switch>
 
