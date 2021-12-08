@@ -7,6 +7,7 @@ import alertify from "alertifyjs";
 import {Switch, Route} from "react-router-dom";
 import CartList from "./CartList";
 import NotFound from "./NotFound";
+import SignUpForm from "./SignUpForm";
 
 class App extends Component {
 
@@ -69,13 +70,14 @@ class App extends Component {
                         </Col>
                         <Col xs="9">
                             <Switch>
-                                <Route exact path={"/"} render={props =>
+                                <Route exact path="/" render={props =>
                                     <ProductList currentCategory={this.state.currentCategory} addToCart={this.addToCart}
                                                  productInfo={productInfo}
                                                  products={this.state.products}> </ProductList>}/>
                                 <Route exact path="/cart" render={props =>
                                     <CartList cart={this.state.cart} removeFromCart={this.removeFromCart}>
                                     </CartList>}/>
+                                <Route exact path="/signup" component={SignUpForm}/>
                                 <Route component={NotFound}/>
                             </Switch>
 
